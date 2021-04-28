@@ -44,8 +44,11 @@ public class PlaneGeneration : MonoBehaviour
         float halfSizeX = scale * xSize / 2;
         float halfSizeZ = scale * zSize / 2;
 
-		for (int i = 0, z = 0; z <= zSize; z++) {
-			for (int x = 0; x <= zSize; x++) {
+        int i = 0;
+		for (int z = 0; z <= zSize; z++) 
+        {
+			for (int x = 0; x <= xSize; x++) 
+            {
 				vertices[i] = new Vector3(x * scale - halfSizeX, 0, z * scale - halfSizeZ);
 				uvs[i] = new Vector2(vertices[i].x, vertices[i].z);
 				i++;
@@ -55,8 +58,10 @@ public class PlaneGeneration : MonoBehaviour
 
 		int vert = 0, tris = 0;
 
-		for (int z = 0; z < zSize; z++) {
-			for (int x = 0; x < xSize; x++) {
+		for (int z = 0; z < zSize; z++) 
+        {
+			for (int x = 0; x < xSize; x++) 
+            {
 				triangles[tris + 0] = vert + 0;
 				triangles[tris + 1] = vert + xSize + 1;
 				triangles[tris + 2] = vert + 1;
