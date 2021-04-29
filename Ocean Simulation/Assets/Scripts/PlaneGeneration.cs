@@ -6,14 +6,11 @@ using UnityEngine;
 public class PlaneGeneration : MonoBehaviour
 {
 
-    [SerializeField]
-    private int xSize = 20;
+    public int xSize = 20;
 
-    [SerializeField]
-    private int zSize = 20;
+    public int zSize = 20;
 
-    [SerializeField]
-    private float scale = 1.0f;
+    public float scale = 1.0f;
 
 
     private Mesh mesh;
@@ -30,33 +27,43 @@ public class PlaneGeneration : MonoBehaviour
         GetComponent<MeshFilter>().mesh = mesh;
         verticiesLength = (xSize + 1) * (zSize + 1);
 
-        CreatePlane();
+        UpdatePlaneVerticies();
         UpdateMesh();
-
-        mesh.RecalculateNormals();
     }
 
-    void CreatePlane()
+    private void FixedUpdate() {
+        // UpdatePlaneVerticies();
+        // UpdateMesh();
+    }
+
+    void UpdatePlaneVerticies()
     {
         vertices = new Vector3[verticiesLength];
-		uvs = new Vector2[vertices.Length];
+        uvs = new Vector2[vertices.Length];
 
         float halfSizeX = scale * xSize / 2;
         float halfSizeZ = scale * zSize / 2;
 
-        int i = 0;
+		int i = 0;
 		for (int z = 0; z <= zSize; z++) 
         {
 			for (int x = 0; x <= xSize; x++) 
             {
-				vertices[i] = new Vector3(x * scale - halfSizeX, 0, z * scale - halfSizeZ);
+                float xPos = x * scale - halfSizeX;
+                float zPos = z * scale - halfSizeZ;
+                float yPos = 0;
+
+				vertices[i] = new Vector3(xPos, yPos, zPos);
+                vertices[i] += WaterController.current.GetWaveAddition(vertices[i] + transform.position, Time.timeSinceLevelLoad);
 				uvs[i] = new Vector2(vertices[i].x, vertices[i].z);
 				i++;
 			}
 		}
-		triangles = new int[xSize * zSize * 6];
 
-		int vert = 0, tris = 0;
+        triangles = new int[xSize * zSize * 6];
+
+		int vert = 0;
+        int tris = 0;
 
 		for (int z = 0; z < zSize; z++) 
         {
@@ -82,6 +89,7 @@ public class PlaneGeneration : MonoBehaviour
         mesh.vertices = vertices;
         mesh.triangles = triangles;
         mesh.uv = uvs;
+        mesh.RecalculateNormals();
     }
 
 }
