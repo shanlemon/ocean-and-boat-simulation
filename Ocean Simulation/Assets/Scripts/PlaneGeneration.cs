@@ -19,6 +19,9 @@ public class PlaneGeneration : MonoBehaviour
     private Vector2[] uvs;
     private int verticiesLength = 0;
 
+    [SerializeField] private Transform debugSphere;
+    [SerializeField] private bool isUpdatingOnCPU = false;
+
 
     // Start is called before the first frame update
     void Start()
@@ -32,8 +35,18 @@ public class PlaneGeneration : MonoBehaviour
     }
 
     private void FixedUpdate() {
-        // UpdatePlaneVerticies();
-        // UpdateMesh();
+        if (isUpdatingOnCPU)
+        {
+            UpdatePlaneVerticies();
+            UpdateMesh();
+        }
+
+        if (debugSphere != null) 
+        {
+            Vector3 newPos = debugSphere.position;
+            newPos.y = WaterController.current.getHeightAtPosition(newPos) + transform.position.y;
+            debugSphere.position = newPos;
+        }
     }
 
     void UpdatePlaneVerticies()
@@ -41,21 +54,24 @@ public class PlaneGeneration : MonoBehaviour
         vertices = new Vector3[verticiesLength];
         uvs = new Vector2[vertices.Length];
 
-        float halfSizeX = scale * xSize / 2;
-        float halfSizeZ = scale * zSize / 2;
+        float halfSizeX = (scale * xSize) / 2;
+        float halfSizeZ = (scale * zSize) / 2;
 
 		int i = 0;
 		for (int z = 0; z <= zSize; z++) 
         {
 			for (int x = 0; x <= xSize; x++) 
             {
-                float xPos = x * scale - halfSizeX;
-                float zPos = z * scale - halfSizeZ;
+                float xPos = (x * scale) - halfSizeX;
+                float zPos = (z * scale) - halfSizeZ;
                 float yPos = 0;
 
 				vertices[i] = new Vector3(xPos, yPos, zPos);
-                // vertices[i] += WaterController.current.GetWaveAddition(vertices[i] + transform.position, Time.timeSinceLevelLoad);
-				uvs[i] = new Vector2(vertices[i].x, vertices[i].z);
+                
+                if (isUpdatingOnCPU)
+                    vertices[i] += WaterController.current.GetWaveAddition(vertices[i] + transform.position, Time.timeSinceLevelLoad);
+				
+                uvs[i] = new Vector2(vertices[i].x, vertices[i].z);
 				i++;
 			}
 		}

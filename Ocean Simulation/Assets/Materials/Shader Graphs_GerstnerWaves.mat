@@ -38,9 +38,24 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_1b96df55d77f4091a34b4fb8712944af: 0.5
-    - Vector1_d1e80ae8b8c84c6f9326a60a63baec3d: 1
-    - Vector1_e37b232bb65a4234a20ce81aad16f8de: 20
+    - Speed1: 0.5
+    - Speed2: 1
+    - Speed3: 0.5
+    - Steepness1: 0.25
+    - Steepness2: 0.1
+    - Steepness3: 0.3
+    - Vector1_1b96df55d77f4091a34b4fb8712944af: 0.25
+    - Vector1_457cbbc0012b406f956a19c4a875b493: 1.5
+    - Vector1_605bc7ab2363440f83c9fbae52d4aea1: 21
+    - Vector1_665756b5bc374cab85753e946cb5e607: 0.5
+    - Vector1_79c0b4a878dd49d59d6bf426fdf5163a: 0.2
+    - Vector1_d047e90faf324ae5990711693599555b: -0.14
+    - Vector1_d1e80ae8b8c84c6f9326a60a63baec3d: 0.5
+    - Vector1_e37b232bb65a4234a20ce81aad16f8de: 62.92
+    - Vector1_ece06494555e4843962f6e2dedbc7b32: 15
+    - Wavelength1: 20
+    - Wavelength2: 15
+    - Wavelength3: 20
     - _AddPrecomputedVelocity: 0
     - _AlphaCutoffEnable: 0
     - _AlphaDstBlend: 0
@@ -89,7 +104,12 @@ Material:
     - _ZTestTransparent: 4
     - _ZWrite: 1
     m_Colors:
-    - Color_7c32988447e44864b24f200a7e212ac0: {r: 0, g: 0.5294118, b: 1, a: 0}
+    - Color_7c32988447e44864b24f200a7e212ac0: {r: 0.23495908, g: 0.51465577, b: 0.9056604, a: 0}
+    - Direction1: {r: 1, g: 1, b: 0, a: 0}
+    - Direction2: {r: 1, g: 1.3, b: 0, a: 0}
+    - Direction3: {r: 1, g: 0.6, b: 0, a: 0}
+    - Vector2_1f764ce95137496da8fe63141945131b: {r: 1, g: 1.3, b: 0, a: 0}
+    - Vector2_dc0bef4524f14d288ae7849a076b24a6: {r: 1, g: 0.6, b: 0, a: 0}
     - Vector2_e29036418c134ba0b376eb9a51bb670a: {r: 1, g: 1, b: 0, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
