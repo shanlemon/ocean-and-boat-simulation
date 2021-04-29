@@ -54,7 +54,7 @@ public class PlaneGeneration : MonoBehaviour
                 float yPos = 0;
 
 				vertices[i] = new Vector3(xPos, yPos, zPos);
-                vertices[i] += WaterController.current.GetWaveAddition(vertices[i] + transform.position, Time.timeSinceLevelLoad);
+                // vertices[i] += WaterController.current.GetWaveAddition(vertices[i] + transform.position, Time.timeSinceLevelLoad);
 				uvs[i] = new Vector2(vertices[i].x, vertices[i].z);
 				i++;
 			}

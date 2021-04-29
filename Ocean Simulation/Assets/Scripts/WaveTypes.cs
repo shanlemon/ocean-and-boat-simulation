@@ -13,4 +13,4 @@ public class WaveTypes {
 
         return new Vector3(normalizedDirection.x * a * Mathf.Cos(f), a * Mathf.Sin(f), normalizedDirection.y * a * Mathf.Cos(f));
     }
-}
+} 
