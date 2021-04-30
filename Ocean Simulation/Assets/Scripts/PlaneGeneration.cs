@@ -34,7 +34,12 @@ public class PlaneGeneration : MonoBehaviour
         UpdateMesh();
     }
 
+    private void Update() {
+        
+    }
+
     private void FixedUpdate() {
+
         if (isUpdatingOnCPU)
         {
             UpdatePlaneVerticies();

@@ -56,6 +56,8 @@ public class WaterController : MonoBehaviour {
         }
 
         return result;
+        // GerstnerData data1 = waveData[0];
+        // return WaveTypes.GerstnerWave(position, data1.Direction, data1.Steepness, data1.WaveLength, data1.Speed, timeSinceStart, debug);
     }
 }
 
