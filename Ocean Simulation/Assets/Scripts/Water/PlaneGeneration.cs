@@ -6,9 +6,7 @@ using UnityEngine;
 public class PlaneGeneration : MonoBehaviour
 {
 
-    public int xSize = 20;
-
-    public int zSize = 20;
+    public int Size = 20;
 
     public float scale = 1.0f;
 
@@ -28,14 +26,10 @@ public class PlaneGeneration : MonoBehaviour
     {
         mesh = new Mesh();
         GetComponent<MeshFilter>().mesh = mesh;
-        verticiesLength = (xSize + 1) * (zSize + 1);
+        verticiesLength = (Size + 1) * (Size + 1);
 
         UpdatePlaneVerticies();
         UpdateMesh();
-    }
-
-    private void Update() {
-        
     }
 
     private void FixedUpdate() {
@@ -59,13 +53,13 @@ public class PlaneGeneration : MonoBehaviour
         vertices = new Vector3[verticiesLength];
         uvs = new Vector2[vertices.Length];
 
-        float halfSizeX = (scale * xSize) / 2;
-        float halfSizeZ = (scale * zSize) / 2;
+        float halfSizeX = (scale * Size) / 2;
+        float halfSizeZ = (scale * Size) / 2;
 
 		int i = 0;
-		for (int z = 0; z <= zSize; z++) 
+		for (int z = 0; z <= Size; z++) 
         {
-			for (int x = 0; x <= xSize; x++) 
+			for (int x = 0; x <= Size; x++) 
             {
                 float xPos = (x * scale) - halfSizeX;
                 float zPos = (z * scale) - halfSizeZ;
@@ -81,21 +75,21 @@ public class PlaneGeneration : MonoBehaviour
 			}
 		}
 
-        triangles = new int[xSize * zSize * 6];
+        triangles = new int[Size * Size * 6];
 
 		int vert = 0;
         int tris = 0;
 
-		for (int z = 0; z < zSize; z++) 
+		for (int z = 0; z < Size; z++) 
         {
-			for (int x = 0; x < xSize; x++) 
+			for (int x = 0; x < Size; x++) 
             {
 				triangles[tris + 0] = vert + 0;
-				triangles[tris + 1] = vert + xSize + 1;
+				triangles[tris + 1] = vert + Size + 1;
 				triangles[tris + 2] = vert + 1;
 				triangles[tris + 3] = vert + 1;
-				triangles[tris + 4] = vert + xSize + 1;
-				triangles[tris + 5] = vert + xSize + 2;
+				triangles[tris + 4] = vert + Size + 1;
+				triangles[tris + 5] = vert + Size + 2;
 
 				vert++;
 				tris += 6;
