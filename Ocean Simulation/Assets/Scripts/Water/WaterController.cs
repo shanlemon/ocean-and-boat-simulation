@@ -18,9 +18,11 @@ public class WaterController : MonoBehaviour {
         if (current != null) Destroy(this);
 
 		current = this;
+
+        waveData = GetDataFromMaterial();
 	}
 
-    private void Start() 
+    public GerstnerData[] GetDataFromMaterial()
     {
         if (material != null)
         {
@@ -29,7 +31,38 @@ public class WaterController : MonoBehaviour {
                 new GerstnerData(material.GetFloat("Wavelength2"), material.GetFloat("Speed2"), material.GetFloat("Steepness2"),  material.GetVector("Direction2")),
                 new GerstnerData(material.GetFloat("Wavelength3"), material.GetFloat("Speed3"), material.GetFloat("Steepness3"),  material.GetVector("Direction3")),
             };
+            return data;
+        }
+
+        Debug.LogError("GetDataFromMaterial(): Material is NULL!");
+        return null;
+    }
+
+    public void SetData(GerstnerData data1, GerstnerData data2, GerstnerData data3)
+    {
+        if (material != null)
+        {
+            GerstnerData[] data = { data1, data2, data3 };
             waveData = data;
+
+            material.SetFloat("Wavelength1", data1.WaveLength);
+            material.SetFloat("Speed1", data1.Speed);
+            material.SetFloat("Steepness1", data1.Steepness);
+            material.SetVector("Direction1", data1.Direction);
+
+            material.SetFloat("Wavelength2", data2.WaveLength);
+            material.SetFloat("Speed2", data2.Speed);
+            material.SetFloat("Steepness2", data2.Steepness);
+            material.SetVector("Direction2", data2.Direction);
+
+            material.SetFloat("Wavelength3", data3.WaveLength);
+            material.SetFloat("Speed3", data3.Speed);
+            material.SetFloat("Steepness3", data3.Steepness);
+            material.SetVector("Direction3", data3.Direction);
+        }
+        else
+        {
+            Debug.LogError("SetDataInMaterial(): Material is NULL!");
         }
     }
 
