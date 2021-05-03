@@ -13,6 +13,8 @@ public class WaterController : MonoBehaviour {
     [SerializeField]
     private Material material;
 
+    public bool isGamePaused = false;
+
 	void Awake() 
     {
         if (current != null) Destroy(this);

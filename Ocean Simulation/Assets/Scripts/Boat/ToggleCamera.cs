@@ -19,7 +19,7 @@ public class ToggleCamera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.T))
+        if (Input.GetKeyUp(KeyCode.T) && !WaterController.current.isGamePaused)
         {
             transform.localPosition = (transform.localPosition == position1) ? position2 : position1;
             transform.localEulerAngles = (transform.localPosition == position2) ? rotation2 : rotation1;

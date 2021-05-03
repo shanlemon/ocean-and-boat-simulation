@@ -23,7 +23,10 @@ public class WheelRotator : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update() {
-		TurnShip(Input.GetAxis("Horizontal"));
+
+		if (!WaterController.current.isGamePaused)
+			TurnShip(Input.GetAxis("Horizontal"));
+			
 	}
 
 	private void TurnShip(float input) {

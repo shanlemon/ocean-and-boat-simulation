@@ -21,7 +21,7 @@ public class BoatController : MonoBehaviour
     void Update()
     {
         //Forward Force
-        if (Input.GetKey(KeyCode.W)) 
+        if (Input.GetKey(KeyCode.W) && !WaterController.current.isGamePaused) 
         {
             GoForward();
         }

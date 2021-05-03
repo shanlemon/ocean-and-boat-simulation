@@ -13,11 +13,43 @@ public class PauseMenu : MonoBehaviour
     public UIData GerstnerUI3;
 
     [SerializeField] private TMPro.TextMeshProUGUI debugText;
+    [SerializeField] private GameObject children;
 
     // Start is called before the first frame update
     void Start()
     {
         GetData();
+    }
+
+    private void Update() {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (WaterController.current.isGamePaused)
+            {
+                ResumeGame();
+            }
+            else
+            {
+                PauseGame();
+            }
+        }
+    }
+
+
+    void PauseGame()
+    {
+        children.SetActive(true);
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        WaterController.current.isGamePaused = true;
+    }
+
+    void ResumeGame()
+    {
+        children.SetActive(false);
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        WaterController.current.isGamePaused = false;
     }
 
     void GetData()
