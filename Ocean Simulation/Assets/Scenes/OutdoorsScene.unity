@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 2158.6533, g: 2263.1992, b: 3302.789, a: 1}
+  m_IndirectSpecularColor: {r: 2162.1611, g: 2268.0469, b: 3311.9258, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1873,8 +1873,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac03cd9d92f5a374fb0ca3cf0a2a5fc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxVelocity: 5
-  ForwardForce: 25
+  ForwardForce: 10
   TurningTorque: 0.2
 --- !u!4 &1823688467 stripped
 Transform:
@@ -2330,6 +2329,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 440979326, guid: ba703ee4e499c2743880ef70d68efbd4, type: 3}
+      propertyPath: maxTurnAngle
+      value: 360
+      objectReference: {fileID: 0}
     - target: {fileID: 6751972860485057484, guid: ba703ee4e499c2743880ef70d68efbd4, type: 3}
       propertyPath: m_Name
       value: Ship
@@ -2382,37 +2385,49 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6751972860485057489, guid: ba703ee4e499c2743880ef70d68efbd4, type: 3}
+      propertyPath: m_Drag
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6751972860485057489, guid: ba703ee4e499c2743880ef70d68efbd4, type: 3}
+      propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6751972860485057489, guid: ba703ee4e499c2743880ef70d68efbd4, type: 3}
+      propertyPath: m_AngularDrag
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 6751972860501542904, guid: ba703ee4e499c2743880ef70d68efbd4, type: 3}
       propertyPath: waterDrag
-      value: 4
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6751972860501542904, guid: ba703ee4e499c2743880ef70d68efbd4, type: 3}
       propertyPath: waterAngularDrag
-      value: 6
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 6751972861021838537, guid: ba703ee4e499c2743880ef70d68efbd4, type: 3}
       propertyPath: waterDrag
-      value: 4
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6751972861021838537, guid: ba703ee4e499c2743880ef70d68efbd4, type: 3}
       propertyPath: waterAngularDrag
-      value: 6
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 6751972861087708355, guid: ba703ee4e499c2743880ef70d68efbd4, type: 3}
       propertyPath: waterDrag
-      value: 4
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6751972861087708355, guid: ba703ee4e499c2743880ef70d68efbd4, type: 3}
       propertyPath: waterAngularDrag
-      value: 6
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 6751972861363808032, guid: ba703ee4e499c2743880ef70d68efbd4, type: 3}
       propertyPath: waterDrag
-      value: 4
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6751972861363808032, guid: ba703ee4e499c2743880ef70d68efbd4, type: 3}
       propertyPath: waterAngularDrag
-      value: 6
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ba703ee4e499c2743880ef70d68efbd4, type: 3}
