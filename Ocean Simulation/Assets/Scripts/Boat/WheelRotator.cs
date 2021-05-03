@@ -3,13 +3,19 @@ using UnityEngine;
 public class WheelRotator : MonoBehaviour {
 
 
-    public static WheelRotator instance;
+  public static WheelRotator Instance;
 
 	[SerializeField] private float turningSpeed = 1f;
 
-	[SerializeField] private float maxTurnAngle = 360;
+	[SerializeField] public float maxTurnAngle = 360;
 
 	public float angle {private set; get;}
+
+	private void Awake() {
+		if (Instance != null) Destroy(this);
+
+		Instance = this;
+	}
 
 	private void Start() {
 		angle = 0;
