@@ -46,6 +46,12 @@ ExportedObj/
 *.mdb
 *.opendb
 *.VC.db
+*.mp4
+Tex/
+partial_movie_files/
+__pycache__/
+manim/
+media/
 
 # Unity3D generated meta files
 *.pidb.meta
