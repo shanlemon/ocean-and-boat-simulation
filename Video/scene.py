@@ -105,18 +105,20 @@ class SineCurveUnitCircle(Scene):
     orbit = self.circle
     origin_point = self.origin_point
 
-    dot = Dot(radius=0.08, color=YELLOW)
+    self.dot = Dot(radius=0.08, color=YELLOW)
+    dot = self.dot
     dot.move_to(orbit.point_from_proportion(0))
     self.t_offset = 0
     rate = 0.25
 
+    self.origin_dot = Dot(radius=0.08, color=YELLOW).move_to(origin_point);
+
     def go_around_circle(mob, dt):
       self.t_offset += (dt * rate)
-      # print(self.t_offset)
       mob.move_to(orbit.point_from_proportion(self.t_offset % 1))
 
     def get_line_to_circle():
-      return Line(origin_point, dot.get_center(), color=BLUE)
+      return Line(self.origin_dot.get_center(), dot.get_center(), color=BLUE)
 
     def get_line_to_curve():
       x = self.curve_start[0] + self.t_offset * 4
@@ -141,13 +143,17 @@ class SineCurveUnitCircle(Scene):
     self.dot_to_curve_line = always_redraw(get_line_to_curve)
     self.sine_curve_line = always_redraw(get_curve)
 
-    self.add(dot)
+    self.add(dot, self.origin_dot)
     self.add(orbit, self.origin_to_circle_line, self.dot_to_curve_line, self.sine_curve_line)
     self.wait(7.99)
 
     dot.remove_updater(go_around_circle)
   def hide_lines_and_move_circle_to_center(self):
 
+    def go_around_circle(mob, dt):
+      self.t_offset += (dt * 0.25)
+      mob.move_to(self.circle.point_from_proportion(self.t_offset % 1))
+    
     labels = []
     for i in range(len(self.x_labels)):
       self.x_labels[i].next_to(np.array([-1 + 2*i, 0, 0]), DOWN)
@@ -156,5 +162,11 @@ class SineCurveUnitCircle(Scene):
 
     self.play(FadeOut(self.x_axis), FadeOut(self.y_axis), FadeOut(self.x_axis_text), FadeOut(self.y_axis_text),
               FadeOut(self.dot_to_curve_line), FadeOut(self.sine_curve_line), *labels)
+
+    self.origin_point = np.array([0,0,0])
+    self.play(ApplyMethod(self.circle.move_to, self.origin_point), ApplyMethod(self.dot.move_to, np.array([1,0,0])), 
+              ApplyMethod(self.origin_dot.move_to, self.origin_point))
+    self.dot.add_updater(go_around_circle)
+    self.wait(5)
 
     
