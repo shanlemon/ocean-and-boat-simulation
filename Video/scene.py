@@ -53,7 +53,21 @@ class SineCurveUnitCircle(Scene):
     self.show_circle()
     self.move_dot_and_draw_curve()
     self.hide_lines_and_move_circle_to_center()
-    self.wait()
+
+    self.additional_dots = []
+    self.num_circles = 0
+    circles = []
+    for i in range(1, 5):
+      circles += self.duplicate_circles(i, i/10)
+      circles += self.duplicate_circles(-i, -i/10)
+    # self.play(*(self.duplicate_circles(1, 0.1) + self.duplicate_circles(-1, -0.1) + self.duplicate_circles(-2, -0.2) + self.duplicate_circles(2, 0.2) + self.duplicate_circles(3, 0.3) + 
+    #             self.duplicate_circles(-3, -0.3)))
+    self.play(*(circles))
+
+    self.show_line_wave()
+
+
+    self.wait(5)
 
   def show_axis(self):
     x_start = np.array([-6,0,0])
@@ -109,12 +123,12 @@ class SineCurveUnitCircle(Scene):
     dot = self.dot
     dot.move_to(orbit.point_from_proportion(0))
     self.t_offset = 0
-    rate = 0.25
+    self.rate = 0.05
 
-    self.origin_dot = Dot(radius=0.08, color=YELLOW).move_to(origin_point);
+    self.origin_dot = Dot(radius=0.08, color=YELLOW).move_to(origin_point)
 
     def go_around_circle(mob, dt):
-      self.t_offset += (dt * rate)
+      self.t_offset += (dt * 0.25)
       mob.move_to(orbit.point_from_proportion(self.t_offset % 1))
 
     def get_line_to_circle():
@@ -143,13 +157,12 @@ class SineCurveUnitCircle(Scene):
     self.dot_to_curve_line = always_redraw(get_line_to_curve)
     self.sine_curve_line = always_redraw(get_curve)
 
-    self.add(dot, self.origin_dot)
-    self.add(orbit, self.origin_to_circle_line, self.dot_to_curve_line, self.sine_curve_line)
+    self.add(self.origin_dot)
+    self.add(orbit, dot, self.origin_to_circle_line, self.dot_to_curve_line, self.sine_curve_line)
     self.wait(7.99)
 
     dot.remove_updater(go_around_circle)
   def hide_lines_and_move_circle_to_center(self):
-
     def go_around_circle(mob, dt):
       self.t_offset += (dt * 0.25)
       mob.move_to(self.circle.point_from_proportion(self.t_offset % 1))
@@ -163,10 +176,45 @@ class SineCurveUnitCircle(Scene):
     self.play(FadeOut(self.x_axis), FadeOut(self.y_axis), FadeOut(self.x_axis_text), FadeOut(self.y_axis_text),
               FadeOut(self.dot_to_curve_line), FadeOut(self.sine_curve_line), *labels)
 
-    self.origin_point = np.array([0,0,0])
-    self.play(ApplyMethod(self.circle.move_to, self.origin_point), ApplyMethod(self.dot.move_to, np.array([1,0,0])), 
-              ApplyMethod(self.origin_dot.move_to, self.origin_point))
     self.dot.add_updater(go_around_circle)
-    self.wait(5)
+    self.origin_point = np.array([0,0,0])
+    self.play(ApplyMethod(self.circle.move_to, self.origin_point), 
+              ApplyMethod(self.origin_dot.move_to, self.origin_point))
+    self.wait(2)
 
+  def duplicate_circles(self, num, shift):
+
+    circle2 = self.circle.copy().shift(RIGHT * num)
+    dot2 = Dot(radius=0.08, color=YELLOW).move_to(np.array([num,0,0]))
+    origin_dot_2 = self.origin_dot.copy().shift(RIGHT * num)
+    
+    def get_line_to_circle():
+      return Line(origin_dot_2.get_center(), dot2.get_center(), color=BLUE)
+
+    def go_around_circle(mob, dt):
+      self.t_offset += (dt * self.rate)
+      mob.move_to(circle2.point_from_proportion((self.t_offset + shift) % 1))
+    
+    dot2.add_updater(go_around_circle)
+
+    line2 = always_redraw(get_line_to_circle)
+
+    self.num_circles += 1
+    self.additional_dots.append(dot2) 
+
+    return [Create(circle2), Create(dot2), Create(origin_dot_2), Create(line2)]
+
+  def show_line_wave(self):
+    # def get_lines_betweem_dots():
+    #   lines = []
+    #   i = 1
+    #   while i < len(self.additional_dots):
+    #     lines += Line(self.additional_dots[i-1].get_center(), self.additional_dots[i].get_center(), color=BLUE)
+    #     i += 1
+    #   return lines[0]
+    line = Line(self.additional_dots[0].get_center(), self.additional_dots[1].get_center(), color=BLUE)
+    Create(line)
+
+    
+    
     
