@@ -49,6 +49,7 @@ class TextTest(Scene):
 class SineCurveUnitCircle(Scene):
   # contributed by heejin_park, https://infograph.tistory.com/230
   def construct(self):
+    self.wait(1.5)
     self.show_axis()
     self.show_circle()
     self.move_dot_and_draw_curve()
@@ -67,7 +68,7 @@ class SineCurveUnitCircle(Scene):
     self.show_line_wave()
 
 
-    self.wait(5)
+    self.wait(10)
 
   def show_axis(self):
     x_start = np.array([-6,0,0])
@@ -85,7 +86,7 @@ class SineCurveUnitCircle(Scene):
     # text = MathTex("y=sin(x)").next_to(y_axis,UP).shift(RIGHT)
 
     self.play(Write(self.y_axis_text))
-    # self.wait(1)
+    self.wait(3)
     self.play(ApplyMethod(self.y_axis_text.shift, LEFT * 3 + UP * 2.5))
 
     self.play(Create(self.x_axis), Create(self.y_axis), Create(self.x_axis_text), *self.get_x_labels())
@@ -123,12 +124,13 @@ class SineCurveUnitCircle(Scene):
     dot = self.dot
     dot.move_to(orbit.point_from_proportion(0))
     self.t_offset = 0
-    self.rate = 0.05
+    self.rate = 0.15
+    rate = self.rate
 
     self.origin_dot = Dot(radius=0.08, color=YELLOW).move_to(origin_point)
 
     def go_around_circle(mob, dt):
-      self.t_offset += (dt * 0.25)
+      self.t_offset += (dt * rate)
       mob.move_to(orbit.point_from_proportion(self.t_offset % 1))
 
     def get_line_to_circle():
@@ -159,7 +161,7 @@ class SineCurveUnitCircle(Scene):
 
     self.add(self.origin_dot)
     self.add(orbit, dot, self.origin_to_circle_line, self.dot_to_curve_line, self.sine_curve_line)
-    self.wait(7.99)
+    self.wait(13)
 
     dot.remove_updater(go_around_circle)
   def hide_lines_and_move_circle_to_center(self):
@@ -191,6 +193,7 @@ class SineCurveUnitCircle(Scene):
     def get_line_to_circle():
       return Line(origin_dot_2.get_center(), dot2.get_center(), color=BLUE)
 
+    self.rate = 0.05
     def go_around_circle(mob, dt):
       self.t_offset += (dt * self.rate)
       mob.move_to(circle2.point_from_proportion((self.t_offset + shift) % 1))

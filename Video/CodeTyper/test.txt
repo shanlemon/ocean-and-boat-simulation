@@ -1,11 +1,11 @@
-this is a test,
- ;alsdkfj
- alsdkfj
- {
+void Start()
+{
+    // Create Mesh
+    mesh = new Mesh();
 
-asdfasdf
+    // Set GameObject mesh
+    GetComponent<MeshFilter>().mesh = mesh;
 
-ff;
-
-
- }
+    verticiesLength = (Size + 1) * (Size + 1);
+    CreatePlane();
+    UpdateMesh();

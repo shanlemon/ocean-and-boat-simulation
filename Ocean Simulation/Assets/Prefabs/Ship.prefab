@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turningSpeed: 200
-  maxTurnAngle: 180
+  maxTurnAngle: 360
 --- !u!1 &1823688464
 GameObject:
   m_ObjectHideFlags: 0
@@ -58,6 +58,7 @@ GameObject:
   - component: {fileID: 1823688466}
   - component: {fileID: 1823688465}
   - component: {fileID: 1823688468}
+  - component: {fileID: 1055262270}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -72,13 +73,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1823688464}
-  m_LocalRotation: {x: -0.000000081460335, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.00049999997, y: 0.3315, z: -1.6934}
+  m_LocalRotation: {x: 0.1778645, y: -0, z: -0, w: 0.984055}
+  m_LocalPosition: {x: 0.00049999997, y: 0.99, z: -2.247}
   m_LocalScale: {x: 0.05, y: 0.05, z: 0.05000001}
   m_Children: []
   m_Father: {fileID: 6501345143016302786}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 20.491, y: 0, z: 0}
 --- !u!20 &1823688466
 Camera:
   m_ObjectHideFlags: 0
@@ -244,6 +245,22 @@ MonoBehaviour:
       data1: 0
       data2: 0
   defaultFrameSettings: 0
+--- !u!114 &1055262270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1823688464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08a95571f6b8a11448c3f1d09bac60d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  position1: {x: 0.0005, y: 0.3315, z: -1.6934}
+  position2: {x: 0.0005, y: 0.66, z: -2.53}
+  rotation1: {x: 0, y: 0, z: 0}
+  rotation2: {x: 20.491, y: 0, z: 0}
 --- !u!1 &5868958163767849592
 GameObject:
   m_ObjectHideFlags: 0
@@ -342,6 +359,7 @@ GameObject:
   - component: {fileID: 6751972860485057490}
   - component: {fileID: 6751972860485057485}
   - component: {fileID: 6751972860485057489}
+  - component: {fileID: 1822189430}
   m_Layer: 0
   m_Name: Ship
   m_TagString: Untagged
@@ -436,13 +454,27 @@ Rigidbody:
   m_GameObject: {fileID: 6751972860485057484}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0.01
-  m_AngularDrag: 0.05
+  m_Drag: 1
+  m_AngularDrag: 5
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1822189430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6751972860485057484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac03cd9d92f5a374fb0ca3cf0a2a5fc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ForwardForce: 10
+  TurningTorque: 0.2
 --- !u!1 &6751972860501542907
 GameObject:
   m_ObjectHideFlags: 0
@@ -553,10 +585,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigidbody: {fileID: 6751972860485057489}
   depthBeforeSubmerged: 1
-  displacementAmount: 3
+  cubeVolume: 3
   floaterCount: 4
-  waterDrag: 2
-  waterAngularDrag: 4
+  waterDrag: 0.5
+  waterAngularDrag: 12
 --- !u!1 &6751972860680934359
 GameObject:
   m_ObjectHideFlags: 0
@@ -581,7 +613,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6751972860680934359}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.56, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6751972861087708356}
@@ -701,10 +733,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigidbody: {fileID: 6751972860485057489}
   depthBeforeSubmerged: 1
-  displacementAmount: 3
+  cubeVolume: 3
   floaterCount: 4
-  waterDrag: 2
-  waterAngularDrag: 4
+  waterDrag: 0.5
+  waterAngularDrag: 12
 --- !u!1 &6751972861087708354
 GameObject:
   m_ObjectHideFlags: 0
@@ -815,10 +847,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigidbody: {fileID: 6751972860485057489}
   depthBeforeSubmerged: 1
-  displacementAmount: 3
+  cubeVolume: 3
   floaterCount: 4
-  waterDrag: 2
-  waterAngularDrag: 4
+  waterDrag: 0.5
+  waterAngularDrag: 12
 --- !u!1 &6751972861363808035
 GameObject:
   m_ObjectHideFlags: 0
@@ -929,10 +961,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigidbody: {fileID: 6751972860485057489}
   depthBeforeSubmerged: 1
-  displacementAmount: 3
+  cubeVolume: 3
   floaterCount: 4
-  waterDrag: 2
-  waterAngularDrag: 4
+  waterDrag: 0.5
+  waterAngularDrag: 12
 --- !u!1001 &6751972861960930579
 PrefabInstance:
   m_ObjectHideFlags: 0

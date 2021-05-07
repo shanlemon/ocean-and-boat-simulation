@@ -5,11 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(MeshFilter))]
 public class PlaneGeneration : MonoBehaviour
 {
-
     public int Size = 20;
-
     public float scale = 1.0f;
-
 
     private Mesh mesh;
     private Vector3[] vertices;
